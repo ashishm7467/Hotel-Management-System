@@ -2,28 +2,25 @@
 
 ## About
 
-This is a basic Python program for managing rooms and guest bookings at VIT's Paradise hotel. The program runs in a terminal.
+This is a basic Python program for managing rooms and bookings at VIT's Paradise hotel. It runs in a terminal.
 
-## What You Can Do
+## Main Menu
 
-- View room types, prices, facilities, and complimentary items.
-- Book an available room for one to three people.
-- Add food and an extra bed to a booking.
-- View a booking by entering its room number.
-- View the bill for a booking.
-- Check out and make the room available again.
+1. Available Rooms
+2. Room Details
+3. Book Room
+4. Guest Details
+5. Booked Rooms
+6. Generate Bill
+7. Check-out
+8. Exit
 
-## How to Run
+## Run the Program
 
-1. Save the Python code in a file. For example, name it `hotel.py`.
-2. Open a terminal in the folder where you saved the file.
-3. Run this command:
+Save the code in a file named hotel.py. Open a terminal in the same folder and type:
 
-```bash
 python hotel.py
-```
-
 
 ## Note
 
-Room and guest information is stored only while the program is running. The information is not saved after the program is closed.
+Room and booking information is kept only while the program is running. It is not saved after the program is closed.
