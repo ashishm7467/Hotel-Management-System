@@ -1,27 +1,45 @@
 guest ={}
 rooms = {
-    101: {"type": "Single", "price": 2000, "food": 500, "bed": 700, "status": "Available",
+    101: {"type": "Single", "occupancy": 1, "price": 2000, "food": 500, "bed": 700, "status": "Available",
           "facilities": ["AC", "TV", "Wi-Fi"], "complimentary": ["Welcome Drink"]},
-    102: {"type": "Single", "price": 2000, "food": 500, "bed": 700, "status": "Available",
+    102: {"type": "Single", "occupancy": 1, "price": 2000, "food": 500, "bed": 700, "status": "Available",
           "facilities": ["AC", "TV", "Wi-Fi"], "complimentary": ["Welcome Drink"]},
-    103: {"type": "Double", "price": 3000, "food": 700, "bed": 800, "status": "Available",
+    103: {"type": "Double", "occupancy": 2, "price": 3000, "food": 700, "bed": 800, "status": "Available",
           "facilities": ["AC", "TV", "Wi-Fi", "Mini Fridge"], "complimentary": ["Breakfast"]},
-    201: {"type": "Deluxe", "price": 4500, "food": 900, "bed": 1000, "status": "Available",
+    201: {"type": "Deluxe", "occupancy": 2, "price": 4500, "food": 900, "bed": 1000, "status": "Available",
           "facilities": ["AC", "TV", "Wi-Fi", "Mini Bar", "Mini Fridge"], "complimentary": ["Breakfast", "Welcome Drink"]},
-    202: {"type": "Deluxe", "price": 4500, "food": 900, "bed": 1000, "status": "Available",
+    202: {"type": "Deluxe", "occupancy": 2, "price": 4500, "food": 900, "bed": 1000, "status": "Available",
           "facilities": ["AC", "TV", "Wi-Fi", "Mini Bar", "Mini Fridge"], "complimentary": ["Breakfast", "Welcome Drink"]},
-    301: {"type": "Suite", "price": 7000, "food": 1200, "bed": 0, "status": "Available",
+    301: {"type": "Suite", "occupancy": 2, "price": 7000, "food": 1200, "bed": 0, "status": "Available",
           "facilities": ["AC", "Smart TV", "Wi-Fi", "King Bed"],
           "complimentary": ["Breakfast", "Room Decoration"]} 
 }
 
-#ROMMMMMMMMMMMMMMMMMMMM
-
+def available_rooms():
+    print("\n====== Available Rooms =======")
+    for number, room in rooms.items():
+        if rooms[number]["status"] == "Available":
+            print("\nRoom:", number)
+            print("Type:", room["type"])
+            print("Occupancy:", room["occupancy"])
+            print("Price:", room["price"], "Per night")
+            print("Food charge:", room["food"], "Per day")
+            print("Aminites:", room["facilities"])
+            print("Complimentries:", room["complimentary"])
+            
+            
+        if room["bed"] > 0:
+            print("Extra beds available = ", room["bed"], "Per night")
+        else:
+            print("")
+            print("\n", "-" * 50)
+            
 def room_details():
     print("\n====== Room Details =======")
     for number, room in rooms.items():
         print("\nRoom:", number)
         print("Type:", room["type"])
+        print("Occupancy:", room["occupancy"])
         print("Price:", room["price"] , "Per night" )
         print("Food charge:", room["food"], "Per day")
         print("Aminites:", room["facilities"])
@@ -34,38 +52,25 @@ def room_details():
             print("")
         print("\n","-" * 50) 
 
-
-                                        #customer details
 def check_in():
     global Number_of_people
     Number_of_people = int(input("How many persons are accomodating in that room - "))
-    if Number_of_people >= 2 and Number_of_people <= 3 :
-        for i in range(1, Number_of_people + 1):
-            print("")
-            print("*" * 5 , "Person", i , "*" * 5)
-            print("")
-            Name = input("Enter your name - ")
-            Age = int(input("Enter your age - "))
-            Phone = input("Enter your phone number - ")
-            Email_id = input("Enter your mail id - ")
-            Id_proof = input("Which id do you want to provide? - ")
-            Id_number = input("Enter your id number - ")
-            print("")
-        Date_and_time = input("Entre the date(DD:MM:YY) and time(HR:MIN(am/pm)) of check in - ")
-            
-    elif Number_of_people == 1 :
-        print("")
-        Name = input("Enter your name - ")
-        Age = int(input("Enter your age - "))
-        Phone = input("Enter your phone number - ")      
-        Email_id = input("Enter your mail id - ")
-        Id_proof = input("Which id do you want to provide? - ")
-        Id_number = input("Enter your id number - ")
-        Date_and_time = input("Entre the date(DD:MM:YY) and time(HR:MIN(am/pm)) of check in - ")
-    else :
-        print("")
-        print("In one room only 3 people can accomodate at max")
+
+    if Number_of_people > 3:
+        print("\nSorry we can accomodate just 3 people at max in a room.\nWe suggest you to book another room for the next person as per your comfort.")
         return
+    
+    print("")
+    Name = str(input("Enter your name - "))
+    Age = int(input("Enter your age - "))
+    Phone = int(input("Enter your phone number - "))
+    Email_id = str(input("Enter your mail id - "))
+    Id_proof = str(input("Which id do you want to provide? - "))
+    Id_number = str(input("Enter your id number - "))
+    print("")
+    Date_and_time = input("Entre the date(DD:MM:YY) and time(HR:MIN(am/pm)) of check in - ")
+            
+    
     
     print("----- CUSTOMER DETAILS -----")
 
@@ -91,18 +96,13 @@ def check_in():
     
     nights = int(input("Number of nights: "))
     room = rooms[number]
+
     
-    print("\n1. Food Package")
-    print("2. No Food")
-    
-    food_choice = int(input("Choose food option: "))
-    
-    if food_choice == 1:
-            food_cost = room["food"] * nights
-            food = "Included"
-    else:
-        food_cost = 0
-        food = "Not Included"
+    food_cost = 0
+    a_choice = input("Include food? (yes/no): ")
+        
+    if a_choice.lower() == "yes" :
+        food_cost = room["food"] * nights
     
     extra = 0
     extra_choice = input("Extra bed? (yes/no): ")
@@ -122,7 +122,7 @@ def check_in():
         "id_number": Id_number,
         "type": room["type"],
         "nights": nights,
-        "food": food,
+        "food": food_cost,
         "room_cost": room_cost,
         "food_cost": food_cost,
         "extra": extra,
@@ -137,9 +137,9 @@ def check_in():
     print("Room: ", number)
     print("Total: ₹", total)
     print("Date n time: ", Date_and_time)
+    print("if you want to book another room, \nplease select option 3 from the main menu.")
 
-
-def search_guest():
+def guest_details():
     number = int(input("\n Entre room number : "))
 
     if number in guest:
@@ -154,11 +154,13 @@ def search_guest():
         print(" ")
         for i in range(1 , Number_of_people + 1):
             print("-" * 34)
-            print("\n", i, ":" , "Guest name : ", customer["name"])
+            print("Guest name : ", customer["name"])
             print("Age : ", customer["age"])
             print("Phone : ", customer["phone"])
             print("Email ID : ", customer["email"])
             print("ID : ", customer["id_proof"], customer["id_number"])
+            print("Food included : ", customer["food"])
+            print("Extra bed : ", customer["extra"])
             print(" ")
         print("-" * 34)
 
@@ -202,31 +204,50 @@ def check_out():
     else:
         print("Checkout cancelled")
 
+def Booked_rooms():
+    print("\n====== Booked Rooms =======")
+
+    for number, room in rooms.items():
+        if rooms[number]["status"] == "Booked":
+            print("\nRoom:", number)
+            print("Type:", room["type"])
+            return
+        
+        else:
+            print("\nNo rooms are booked at the moment.")
+            break
+
 while True:
 
     print("\n","=" * 34 )
     print(" ","*" * 8, "VIT's Paradise", "*" * 8)
     print("","=" * 34 )
-    print("   ","1. Room details")
-    print("   ","2. Book room")
-    print("   ","3. Search Guest")
-    print("   ","4. Generate bill")
-    print("   ","5. Check-out")
-    print("   ","6. Exit")
+    print("   ","1. Available Rooms")
+    print("   ","2. Room details")
+    print("   ","3. Book room")
+    print("   ","4. Guest Details")
+    print("   ","5. Generate bill")
+    print("   ","6. Check-out")
+    print("   ","7. Booked rooms")
+    print("   ","8. Exit")
     print("", "=" * 34 )
 
     choice = int(input("Entre your choice : "))
     if choice == 1:
-        room_details()
+        available_rooms()
     elif choice == 2:
-        check_in()
+        room_details()
     elif choice == 3:
-        search_guest()
+        check_in()
     elif choice == 4:
-        bill()
+        guest_details()
     elif choice == 5:
-        check_out()
+        bill()
     elif choice == 6:
+        check_out()
+    elif choice == 7:
+            Booked_rooms()
+    elif choice == 8:
         print("Thank you for visiting VIT's Paradise \n     ___***Visit Again***___")
     else:
         print("Invalid choice")
