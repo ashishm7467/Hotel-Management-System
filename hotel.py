@@ -19,13 +19,13 @@ def available_rooms():
     print("\n====== Available Rooms =======")
     for number, room in rooms.items():
         if rooms[number]["status"] == "Available":
-            print("\nRoom:", number)
-            print("Type:", room["type"])
-            print("Occupancy:", room["occupancy"])
-            print("Price:", room["price"], "Per night")
-            print("Food charge:", room["food"], "Per day")
-            print("Aminites:", room["facilities"])
-            print("Complimentries:", room["complimentary"])
+            print("\nRoom: ", number)
+            print("Type: ", room["type"])
+            print("Occupancy: ", room["occupancy"])
+            print("Price: ", room["price"], "Per night")
+            print("Food charge: ", room["food"], "Per day")
+            print("Aminites: ", room["facilities"])
+            print("Complimentries: ", room["complimentary"])
             
             
         if room["bed"] > 0:
@@ -33,17 +33,17 @@ def available_rooms():
         else:
             print("")
             print("\n", "-" * 50)
-            
+
 def room_details():
     print("\n====== Room Details =======")
     for number, room in rooms.items():
-        print("\nRoom:", number)
-        print("Type:", room["type"])
-        print("Occupancy:", room["occupancy"])
-        print("Price:", room["price"] , "Per night" )
-        print("Food charge:", room["food"], "Per day")
-        print("Aminites:", room["facilities"])
-        print("Complimentries:", room["complimentary"])
+        print("\nRoom: ", number)
+        print("Type: ", room["type"])
+        print("Occupancy: ", room["occupancy"])
+        print("Price: ", room["price"] , "Per night" )
+        print("Food charge: ", room["food"], "Per day")
+        print("Aminites: ", room["facilities"])
+        print("Complimentries: ", room["complimentary"])
 
         if room["bed"] > 0:
             print("Extra beds available = ", room["bed"],"Per night")
@@ -167,6 +167,20 @@ def guest_details():
     else:
             print("No guest found.")
 
+def Booked_rooms():
+    print("\n====== Booked Rooms =======")
+
+    for number, room in rooms.items():
+        if rooms[number]["status"] == "Booked":
+            print("\nRoom: ", number)
+            print("Type: ", room["type"])
+            print("Guest name: ", guest[number]["name"])
+            return
+        
+        else:
+            print("\nNo rooms are booked at the moment.")
+            break
+
 def bill():
     number = int(input("\nEnter room number: "))
 
@@ -204,19 +218,6 @@ def check_out():
     else:
         print("Checkout cancelled")
 
-def Booked_rooms():
-    print("\n====== Booked Rooms =======")
-
-    for number, room in rooms.items():
-        if rooms[number]["status"] == "Booked":
-            print("\nRoom:", number)
-            print("Type:", room["type"])
-            return
-        
-        else:
-            print("\nNo rooms are booked at the moment.")
-            break
-
 while True:
 
     print("\n","=" * 34 )
@@ -226,9 +227,9 @@ while True:
     print("   ","2. Room details")
     print("   ","3. Book room")
     print("   ","4. Guest Details")
-    print("   ","5. Generate bill")
-    print("   ","6. Check-out")
-    print("   ","7. Booked rooms")
+    print("   ","5. Booked rooms")
+    print("   ","6. Generate bill")
+    print("   ","7. Check-out")
     print("   ","8. Exit")
     print("", "=" * 34 )
 
@@ -242,11 +243,11 @@ while True:
     elif choice == 4:
         guest_details()
     elif choice == 5:
-        bill()
+        Booked_rooms()
     elif choice == 6:
-        check_out()
+        bill()
     elif choice == 7:
-            Booked_rooms()
+        check_out()
     elif choice == 8:
         print("Thank you for visiting VIT's Paradise \n     ___***Visit Again***___")
     else:
